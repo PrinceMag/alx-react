@@ -1,8 +1,18 @@
+import React, { useRef } from "react";
 import logo from "./holberton-logo.jpg";
 import "./App.css";
 import { getFullYear, getFooterCopy } from "./utils";
 
 function App() {
+  // Create refs for input fields
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
+  // Function to focus on input field when label is clicked
+  const handleLabelClick = (inputRef) => {
+    inputRef.current.focus();
+  };
+
   return (
     <div className="App">
       <div className="App-header">
@@ -12,10 +22,18 @@ function App() {
       <div className="App-body">
         <p>Login to access the full dashboard</p>
         <form>
-          <label htmlFor="email">Email:</label>
-          <input type="email" name="email"></input>
-          <label htmlFor="password">Password:</label>
-          <input type="password" name="password"></input>
+          {/* Associate label with input using htmlFor */}
+          <label htmlFor="email" onClick={() => handleLabelClick(emailInputRef)}>
+            Email:
+          </label>
+          {/* Add ref to input field */}
+          <input type="email" id="email" name="email" ref={emailInputRef} />
+          {/* Associate label with input using htmlFor */}
+          <label htmlFor="password" onClick={() => handleLabelClick(passwordInputRef)}>
+            Password:
+          </label>
+          {/* Add ref to input field */}
+          <input type="password" id="password" name="password" ref={passwordInputRef} />
           <button>OK</button>
         </form>
       </div>
